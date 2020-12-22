@@ -13,6 +13,7 @@
 		B7146E5D255B5BCD00D8EDD1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7146E5C255B5BCD00D8EDD1 /* Preview Assets.xcassets */; };
 		B7146E68255B5BCD00D8EDD1 /* projectretailstoreclientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7146E67255B5BCD00D8EDD1 /* projectretailstoreclientTests.swift */; };
 		B7146E73255B5BCD00D8EDD1 /* projectretailstoreclientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7146E72255B5BCD00D8EDD1 /* projectretailstoreclientUITests.swift */; };
+		B7E9D6A42591AE270091385E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7E9D6A32591AE270091385E /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		B7146E6E255B5BCD00D8EDD1 /* projectretailstoreclientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = projectretailstoreclientUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7146E72255B5BCD00D8EDD1 /* projectretailstoreclientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = projectretailstoreclientUITests.swift; sourceTree = "<group>"; };
 		B7146E74255B5BCD00D8EDD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7E9D6A32591AE270091385E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				B7146E66255B5BCD00D8EDD1 /* projectretailstoreclientTests */,
 				B7146E71255B5BCD00D8EDD1 /* projectretailstoreclientUITests */,
 				B7146E53255B5BCA00D8EDD1 /* Products */,
+				B7E9D6A32591AE270091385E /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -234,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7146E5D255B5BCD00D8EDD1 /* Preview Assets.xcassets in Resources */,
+				B7E9D6A42591AE270091385E /* GoogleService-Info.plist in Resources */,
 				B7146E5A255B5BCD00D8EDD1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
