@@ -6,30 +6,47 @@
 //
 
 import SwiftUI
+import Combine
 
 
 struct BeginButton: View {
     
-    
-    @State var nearbyUsers: Array<UserBrief> = []
-    
-    var body: some View {
-        Button(action: {
-            getNearbyUsers() { output in
-                print("Output from view: \(output)")
-                
-                nearbyUsers = output
-    
-            }
+    @EnvironmentObject var nearbyUsers: NearbyUsers
+
+    func addUsers(users: [UserBrief]) {
+
+        //Add to list
+        DispatchQueue.main.async {
+            //Clear list (refresh)
+            nearbyUsers.nearbyUsers.removeAll()
             
-        }) {
-            HStack {
-                Spacer()
-                    Text(BEGIN_BUTTON)
-                Spacer()
+            for user in users {
+                nearbyUsers.nearbyUsers.append(user)
             }
         }
-        .buttonStyle(LargeButtonModifier())
+    }
+    
+    var body: some View {
+        
+        VStack(spacing: 20) {
+            
+            Button(action: {
+                getNearbyUsers() { users in
+                    addUsers(users: users)
+                }
+            }) {
+                HStack {
+                    Spacer()
+                        Text(BEGIN_BUTTON)
+                    Spacer()
+                }
+            }
+            .buttonStyle(LargeButtonModifier())
+            
+        }
+        
+        
+        
     }
     
 

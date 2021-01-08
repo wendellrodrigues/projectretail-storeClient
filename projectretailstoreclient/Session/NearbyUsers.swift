@@ -13,11 +13,9 @@ import SwiftUI
 class NearbyUsers: ObservableObject {
     
     let objectWillChange = PassthroughSubject<NearbyUsers,Never>()
-    
-    @Published var nearbyUsers: Array = [] {
-        didSet {
-            objectWillChange.send(self)
-        }
+
+    @Published var nearbyUsers: [UserBrief] = [] {
+        didSet { objectWillChange.send(self) }
     }
     
 }

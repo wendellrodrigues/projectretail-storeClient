@@ -13,10 +13,6 @@ struct SessionModel: Codable {
     var beaconMinor: String
 }
 
-struct UserBrief: Decodable {
-    let id: String
-    let name: String
-}
 
 func getNearbyUsers(completion: @escaping(Array<UserBrief>) -> Void) -> Void {
     

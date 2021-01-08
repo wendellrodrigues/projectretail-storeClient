@@ -12,7 +12,7 @@ import SwiftUI
 struct projectretailstoreclientApp: App {
     var body: some Scene {
         WindowGroup {
-            Home()
+            Home().environmentObject(NearbyUsers())
         }
     }
 }
