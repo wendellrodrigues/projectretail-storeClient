@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseStorage
+
 
 struct Home: View {
     
@@ -13,8 +16,42 @@ struct Home: View {
     
     private var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
+    @State var image: UIImage = UIImage(systemName: "questionmark")!
+    
+    
+    //Load up a firebase image
+    func loadFirebaseImage() {
+        //Storage
+        let storage = Storage.storage()
+        // Create a reference from a Google Cloud Storage URI
+        let gsReference = storage.reference(forURL: "gs://projectretail-4dd60.appspot.com/khakis.png")
+        // Download in memory with a maximum allowed size of 2MB (2* 1024 * 1024 bytes)
+        gsReference.getData(maxSize: 2 * 1024 * 1024) { data, error in
+          if let error = error {
+            print(error)
+          } else {
+            // Data for "images/island.jpg" is returned
+            self.image = UIImage(data: data!)!
+            print("We have some data")
+          }
+        }
+    }
+    
+    init() {
+        //Load this beacon information (API Call)
+        
+        //Load Firebase image based on API Call
+        loadFirebaseImage()
+    }
+    
+
     var body: some View {
         VStack {
+            
+            Image(uiImage: (image))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxHeight: 200)
             if(nearbyUsers.nearbyUsers.count == 0) {
                 //Welcome message
                 Text(WELCOME_MSG_TITLE)
@@ -47,6 +84,5 @@ struct Home: View {
                 
             }
         }
-       
     }
 }
