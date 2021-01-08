@@ -11,7 +11,7 @@ import FirebaseStorage
 
 
 
-let REQUEST_URL = "10.0.0.248"
+let REQUEST_URL = "192.168.1.66"
 
 let BEGIN_BUTTON = "Begin"
 let WELCOME_MSG_TITLE = "Welcome"

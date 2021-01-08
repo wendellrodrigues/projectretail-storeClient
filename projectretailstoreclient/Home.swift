@@ -14,10 +14,10 @@ struct Home: View {
     
     @ObservedObject var nearbyUsers = NearbyUsers()
     
-    private var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    @EnvironmentObject var currentShelf: Shelf
     
     @State var image: UIImage = UIImage(systemName: "questionmark")!
-    
+
     
     //Load up a firebase image
     func loadFirebaseImage() {
@@ -37,21 +37,13 @@ struct Home: View {
         }
     }
     
-    init() {
-        //Load this beacon information (API Call)
-        
-        //Load Firebase image based on API Call
-        loadFirebaseImage()
-    }
-    
 
     var body: some View {
         VStack {
-            
-            Image(uiImage: (image))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxHeight: 200)
+//            Image(uiImage: (image))
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(maxHeight: 200)
             if(nearbyUsers.nearbyUsers.count == 0) {
                 //Welcome message
                 Text(WELCOME_MSG_TITLE)
@@ -68,6 +60,8 @@ struct Home: View {
                     .padding()
                     .padding(.bottom, 50)
                 
+                Text("\(currentShelf.shelf.name)")
+                
                 //Grid of names
                 ScrollView {
                     LazyVGrid(columns: threeColumnGrid) {
@@ -79,10 +73,15 @@ struct Home: View {
                 .frame(maxHeight: 100)
                 
                 //Refresh Button
-                BeginButton().environmentObject(nearbyUsers)
+                BeginButton()
+                    .environmentObject(nearbyUsers)
+                    .environmentObject(currentShelf)
                 
                 
             }
+        }
+        .onAppear() {
+            loadFirebaseImage()
         }
     }
 }

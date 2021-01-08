@@ -26,6 +26,10 @@
 		B7385BFD259BE64D001A60DF /* DMSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7385BF7259BE64D001A60DF /* DMSans-Regular.ttf */; };
 		B7385C0325A54BF2001A60DF /* NearbyUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7385C0225A54BF2001A60DF /* NearbyUsers.swift */; };
 		B7385C0C25A82801001A60DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7385C0B25A82800001A60DF /* User.swift */; };
+		B7385C1925A8EE4A001A60DF /* ShelfModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7385C1825A8EE49001A60DF /* ShelfModel.swift */; };
+		B7385C1E25A8FDA3001A60DF /* NameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7385C1D25A8FDA2001A60DF /* NameButton.swift */; };
+		B7385C2325A90043001A60DF /* Shelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7385C2225A90043001A60DF /* Shelf.swift */; };
+		B7385C3125A904BD001A60DF /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7385C3025A904BD001A60DF /* Modifiers.swift */; };
 		B7E9D6A42591AE270091385E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7E9D6A32591AE270091385E /* GoogleService-Info.plist */; };
 		B7E9D6C6259BD4D80091385E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E9D6C5259BD4D80091385E /* Constants.swift */; };
 		EA06D4A20A1FBB70796B924F /* Pods_projectretailstoreclient_projectretailstoreclientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C15E162FCC4D634C292A1F /* Pods_projectretailstoreclient_projectretailstoreclientUITests.framework */; };
@@ -78,6 +82,10 @@
 		B7385BF7259BE64D001A60DF /* DMSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans-Regular.ttf"; sourceTree = "<group>"; };
 		B7385C0225A54BF2001A60DF /* NearbyUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyUsers.swift; sourceTree = "<group>"; };
 		B7385C0B25A82800001A60DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B7385C1825A8EE49001A60DF /* ShelfModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfModel.swift; sourceTree = "<group>"; };
+		B7385C1D25A8FDA2001A60DF /* NameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameButton.swift; sourceTree = "<group>"; };
+		B7385C2225A90043001A60DF /* Shelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelf.swift; sourceTree = "<group>"; };
+		B7385C3025A904BD001A60DF /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		B7E9D6A32591AE270091385E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7E9D6C5259BD4D80091385E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BC9CF860B419BAF59966F7DE /* Pods-projectretailstoreclient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-projectretailstoreclient.debug.xcconfig"; path = "Target Support Files/Pods-projectretailstoreclient/Pods-projectretailstoreclient.debug.xcconfig"; sourceTree = "<group>"; };
@@ -203,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				B7385BB9259BE194001A60DF /* BeginButton.swift */,
+				B7385C1D25A8FDA2001A60DF /* NameButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -211,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				B7385BBF259BE1E5001A60DF /* ButtonModifiers.swift */,
+				B7385C3025A904BD001A60DF /* Modifiers.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -219,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				B7385C0225A54BF2001A60DF /* NearbyUsers.swift */,
+				B7385C2225A90043001A60DF /* Shelf.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -227,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				B7385C0B25A82800001A60DF /* User.swift */,
+				B7385C1825A8EE49001A60DF /* ShelfModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -485,11 +497,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7385C1925A8EE4A001A60DF /* ShelfModel.swift in Sources */,
+				B7385C2325A90043001A60DF /* Shelf.swift in Sources */,
 				B7385BC0259BE1E5001A60DF /* ButtonModifiers.swift in Sources */,
 				B7146E58255B5BCA00D8EDD1 /* Home.swift in Sources */,
+				B7385C3125A904BD001A60DF /* Modifiers.swift in Sources */,
 				B7385BBA259BE194001A60DF /* BeginButton.swift in Sources */,
 				B7385C0325A54BF2001A60DF /* NearbyUsers.swift in Sources */,
 				B7385C0C25A82801001A60DF /* User.swift in Sources */,
+				B7385C1E25A8FDA3001A60DF /* NameButton.swift in Sources */,
 				B7146E56255B5BCA00D8EDD1 /* projectretailstoreclientApp.swift in Sources */,
 				B7385BA9259BE0D0001A60DF /* Api.swift in Sources */,
 				B7E9D6C6259BD4D80091385E /* Constants.swift in Sources */,

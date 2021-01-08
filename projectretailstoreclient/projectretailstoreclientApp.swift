@@ -18,7 +18,9 @@ struct projectretailstoreclientApp: App {
     
     var body: some Scene {
         WindowGroup {
-            Home().environmentObject(NearbyUsers())
+            Home()
+                .environmentObject(NearbyUsers())
+                .environmentObject(Shelf())
         }
     }
 }

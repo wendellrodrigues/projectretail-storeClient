@@ -12,17 +12,22 @@ import Combine
 struct BeginButton: View {
     
     @EnvironmentObject var nearbyUsers: NearbyUsers
+    @EnvironmentObject var shelf: Shelf
 
     func addUsers(users: [UserBrief]) {
-
         //Add to list
         DispatchQueue.main.async {
             //Clear list (refresh)
             nearbyUsers.nearbyUsers.removeAll()
-            
             for user in users {
                 nearbyUsers.nearbyUsers.append(user)
             }
+        }
+    }
+    
+    func loadShelf(shelf: ShelfModel) {
+        DispatchQueue.main.async {
+            self.shelf.shelf = shelf
         }
     }
     
@@ -31,6 +36,12 @@ struct BeginButton: View {
         VStack(spacing: 20) {
             
             Button(action: {
+                
+                //Load Shelf data and mount it onto CurrentShelf
+                getShelf() { shelf in
+                    loadShelf(shelf: shelf)
+                }
+                
                 getNearbyUsers() { users in
                     addUsers(users: users)
                 }

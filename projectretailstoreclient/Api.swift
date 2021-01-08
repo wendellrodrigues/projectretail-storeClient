@@ -9,13 +9,26 @@ import Foundation
 import Firebase
 import FirebaseStorage
 
-struct SessionModel: Codable {
+
+
+//Request Structures
+struct NearbyUserRequest: Codable {
     var beaconId: String
     var beaconMajor: String
     var beaconMinor: String
 }
 
+struct UserRequest: Codable {
+    var uid: String
+}
 
+struct ShelfRequest: Codable {
+    var beaconId: String
+    var beaconMajor: String
+    var beaconMinor: String
+}
+
+//POST Requests
 func getNearbyUsers(completion: @escaping(Array<UserBrief>) -> Void) -> Void {
     
     var nearbyUsers: Array<UserBrief> = []
@@ -31,7 +44,7 @@ func getNearbyUsers(completion: @escaping(Array<UserBrief>) -> Void) -> Void {
     request.setValue("application/JSON", forHTTPHeaderField: "Content-Type")
 
     //Structure data
-    let infoToSend = SessionModel(
+    let infoToSend = NearbyUserRequest(
         beaconId : BEACON_ID,
         beaconMajor : BEACON_MAJOR,
         beaconMinor: BEACON_MINOR
@@ -58,32 +71,69 @@ func getNearbyUsers(completion: @escaping(Array<UserBrief>) -> Void) -> Void {
 
 }
 
-func getUser(completion: @escaping(User) -> Void) -> Void {
+
+
+func getShelf(completion: @escaping(ShelfModel) -> Void) -> Void {
     
     //URL Specifics
-    guard let url = URL(string: "http:\(REQUEST_URL):3000/routes/getNearbyUsers") else { return }
+    guard let url = URL(string: "http:\(REQUEST_URL):3000/routes/getShelf") else { return }
     
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.setValue("application/JSON", forHTTPHeaderField: "Accept")
     request.setValue("application/JSON", forHTTPHeaderField: "Content-Type")
 
-    //Structure data
-    let infoToSend = SessionModel(
+    //Structure data for request
+    let req = ShelfRequest(
         beaconId : BEACON_ID,
         beaconMajor : BEACON_MAJOR,
         beaconMinor: BEACON_MINOR
     )
-
-    //Encode JSON
+    
+    //Encode request
     let encoder = JSONEncoder()
     encoder.outputFormatting = .prettyPrinted
-    
-    let jsonData = try! encoder.encode(infoToSend)
-  
+    let jsonData = try! encoder.encode(req)
     request.httpBody = jsonData
     
+    //Task
+    let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let data = data {
+            let shelf: ShelfModel = try! JSONDecoder().decode(ShelfModel.self, from: data)
+            completion(shelf)
+        }
+    }
+    
+    task.resume()
+    
 }
+
+//func getUser(completion: @escaping(User) -> Void) -> Void {
+//
+//    //URL Specifics
+//    guard let url = URL(string: "http:\(REQUEST_URL):3000/routes/getUser") else { return }
+//
+//    var request = URLRequest(url: url)
+//    request.httpMethod = "POST"
+//    request.setValue("application/JSON", forHTTPHeaderField: "Accept")
+//    request.setValue("application/JSON", forHTTPHeaderField: "Content-Type")
+//
+//    //Structure data
+//    let infoToSend = SessionModel(
+//        beaconId : BEACON_ID,
+//        beaconMajor : BEACON_MAJOR,
+//        beaconMinor: BEACON_MINOR
+//    )
+//
+//    //Encode JSON
+//    let encoder = JSONEncoder()
+//    encoder.outputFormatting = .prettyPrinted
+//
+//    let jsonData = try! encoder.encode(infoToSend)
+//
+//    request.httpBody = jsonData
+//
+//}
 
 
 func loadImage(completion: @escaping(UIImage) -> Void) -> Void {
