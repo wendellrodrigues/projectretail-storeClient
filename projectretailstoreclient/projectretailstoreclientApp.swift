@@ -21,6 +21,7 @@ struct projectretailstoreclientApp: App {
             Home()
                 .environmentObject(NearbyUsers())
                 .environmentObject(Shelf())
+                .environmentObject(CurrentUser())
         }
     }
 }

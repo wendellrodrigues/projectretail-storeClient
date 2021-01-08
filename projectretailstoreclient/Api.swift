@@ -9,8 +9,6 @@ import Foundation
 import Firebase
 import FirebaseStorage
 
-
-
 //Request Structures
 struct NearbyUserRequest: Codable {
     var beaconId: String
@@ -19,7 +17,7 @@ struct NearbyUserRequest: Codable {
 }
 
 struct UserRequest: Codable {
-    var uid: String
+    var userId: String
 }
 
 struct ShelfRequest: Codable {
@@ -71,8 +69,6 @@ func getNearbyUsers(completion: @escaping(Array<UserBrief>) -> Void) -> Void {
 
 }
 
-
-
 func getShelf(completion: @escaping(ShelfModel) -> Void) -> Void {
     
     //URL Specifics
@@ -108,32 +104,39 @@ func getShelf(completion: @escaping(ShelfModel) -> Void) -> Void {
     
 }
 
-//func getUser(completion: @escaping(User) -> Void) -> Void {
-//
-//    //URL Specifics
-//    guard let url = URL(string: "http:\(REQUEST_URL):3000/routes/getUser") else { return }
-//
-//    var request = URLRequest(url: url)
-//    request.httpMethod = "POST"
-//    request.setValue("application/JSON", forHTTPHeaderField: "Accept")
-//    request.setValue("application/JSON", forHTTPHeaderField: "Content-Type")
-//
-//    //Structure data
-//    let infoToSend = SessionModel(
-//        beaconId : BEACON_ID,
-//        beaconMajor : BEACON_MAJOR,
-//        beaconMinor: BEACON_MINOR
-//    )
-//
-//    //Encode JSON
-//    let encoder = JSONEncoder()
-//    encoder.outputFormatting = .prettyPrinted
-//
-//    let jsonData = try! encoder.encode(infoToSend)
-//
-//    request.httpBody = jsonData
-//
-//}
+func getUser(uid: String, completion: @escaping(User) -> Void) -> Void {
+    
+    //URL Specifics
+    guard let url = URL(string: "http:\(REQUEST_URL):3000/routes/getUser") else { return }
+
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("application/JSON", forHTTPHeaderField: "Accept")
+    request.setValue("application/JSON", forHTTPHeaderField: "Content-Type")
+    
+    print(uid)
+
+    //Structure data
+    let req = UserRequest(userId: uid)
+
+    //Encode JSON
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .prettyPrinted
+    let jsonData = try! encoder.encode(req)
+    request.httpBody = jsonData
+    
+    //Task
+    let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let data = data {
+            let user: User = try! JSONDecoder().decode(User.self, from: data)
+            completion(user)
+        }
+    }
+    
+    task.resume()
+}
+
+
 
 
 func loadImage(completion: @escaping(UIImage) -> Void) -> Void {

@@ -14,9 +14,7 @@ struct ShelfModel: Decodable {
     let name        : String
     let image       : String
     let nearbyUsers : [UserBrief]
-    let sizes       : [Size]
-    
-    
+    let sizes       : [Size] //Alter if the size is not Length/Waist (pants only)
 }
 
 struct Size: Decodable {

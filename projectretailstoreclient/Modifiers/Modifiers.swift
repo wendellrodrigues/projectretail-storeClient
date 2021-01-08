@@ -8,5 +8,4 @@
 import Foundation
 import SwiftUI
 
-
 let threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
