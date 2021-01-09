@@ -12,74 +12,42 @@ import FirebaseStorage
 
 struct Home: View {
     
-    @ObservedObject var nearbyUsers = NearbyUsers()
-    
+    @EnvironmentObject var nearbyUsers: NearbyUsers
     @EnvironmentObject var currentShelf: Shelf
     @EnvironmentObject var currentUser: CurrentUser
     
+    @State var began: Bool = false
     
     
     var body: some View {
         VStack {
             
-            if(nearbyUsers.nearbyUsers.count == 0) {
+            
+            if(currentUser.isCurUser) {
+                ProductView()
+                    .environmentObject(currentShelf)
+                    .environmentObject(currentUser)
+            }
+            
+            else {
                 //Welcome message
-                Text(WELCOME_MSG_TITLE)
-                    .font(Font.custom("DMSans-Bold", size: 50))
+                Text(began ? SELECT_NAME_INSTRUCTIONS : WELCOME_MSG_TITLE)
+                    .font(Font.custom("DMSans-Bold", size: began ? 30 : 50))
                     .padding()
-                    .padding(.bottom, 50)
+                    .padding(.bottom, began ? 50 : 80)
+                    .animation(.easeInOut)
                 
+                if(began) {
+                    NearbyUsersView()
+                }
+            
                 //Button that begins search for nearby users
-                BeginButton().environmentObject(nearbyUsers)
-            } else {
-                
-                if(currentUser.isCurUser) {
-                    ProductView()
-                        .environmentObject(currentShelf)
-                        .environmentObject(currentUser)
-                }
-                
-                else {
-                
-                    //Instructions to select name
-                    Text(SELECT_NAME_INSTRUCTIONS)
-                        .font(Font.custom("DMSans-Bold", size: 30))
-                        .padding()
-                        .padding(.bottom, 50)
-                    
-                    Text("\(currentShelf.shelf.name)")
-                    
-                    //Grid of names
-                    ScrollView {
-                        LazyVGrid(columns: threeColumnGrid) {
-                            ForEach(nearbyUsers.nearbyUsers) { data in
-                                HStack {
-                                    Text(data.id)
-                                        .onTapGesture {
-                                            //Load current user
-                                            getUser(uid: data.id) { user in
-                                                currentUser.user = user
-                                            }
-                                            //Let view know there is a current user
-                                            currentUser.isCurUser = true
-                                        }
-                                }
-                                
-                                
-                            }
-                        }
-                    }
-                    .frame(maxHeight: 100)
-                    
-                    //Refresh Button
-                    BeginButton()
-                        .environmentObject(nearbyUsers)
-                        .environmentObject(currentShelf)
-                        
-                }
-                
+                BeginButton(began: $began).environmentObject(nearbyUsers)
                 
             }
+
+
+                            
         }
     }
 }

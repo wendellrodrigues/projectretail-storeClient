@@ -13,6 +13,8 @@ struct BeginButton: View {
     
     @EnvironmentObject var nearbyUsers: NearbyUsers
     @EnvironmentObject var shelf: Shelf
+    
+    @Binding var began: Bool
 
     func addUsers(users: [UserBrief]) {
         //Add to list
@@ -37,6 +39,8 @@ struct BeginButton: View {
             
             Button(action: {
                 
+                self.began = true
+                
                 //Load Shelf data and mount it onto CurrentShelf
                 getShelf() { shelf in
                     loadShelf(shelf: shelf)
@@ -45,6 +49,7 @@ struct BeginButton: View {
                 getNearbyUsers() { users in
                     addUsers(users: users)
                 }
+                
             }) {
                 HStack {
                     Spacer()

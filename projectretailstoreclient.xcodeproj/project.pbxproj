@@ -16,6 +16,7 @@
 		B7146E68255B5BCD00D8EDD1 /* projectretailstoreclientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7146E67255B5BCD00D8EDD1 /* projectretailstoreclientTests.swift */; };
 		B7146E73255B5BCD00D8EDD1 /* projectretailstoreclientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7146E72255B5BCD00D8EDD1 /* projectretailstoreclientUITests.swift */; };
 		B72794E325A90B7000C1860C /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72794E225A90B7000C1860C /* CurrentUser.swift */; };
+		B72794EB25A923A700C1860C /* NearbyUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72794EA25A923A700C1860C /* NearbyUsersView.swift */; };
 		B7385BA9259BE0D0001A60DF /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7385BA8259BE0D0001A60DF /* Api.swift */; };
 		B7385BBA259BE194001A60DF /* BeginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7385BB9259BE194001A60DF /* BeginButton.swift */; };
 		B7385BC0259BE1E5001A60DF /* ButtonModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7385BBF259BE1E5001A60DF /* ButtonModifiers.swift */; };
@@ -74,6 +75,7 @@
 		B7146E72255B5BCD00D8EDD1 /* projectretailstoreclientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = projectretailstoreclientUITests.swift; sourceTree = "<group>"; };
 		B7146E74255B5BCD00D8EDD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B72794E225A90B7000C1860C /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		B72794EA25A923A700C1860C /* NearbyUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyUsersView.swift; sourceTree = "<group>"; };
 		B7385BA8259BE0D0001A60DF /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		B7385BB9259BE194001A60DF /* BeginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginButton.swift; sourceTree = "<group>"; };
 		B7385BBF259BE1E5001A60DF /* ButtonModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModifiers.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			children = (
 				B7385BB9259BE194001A60DF /* BeginButton.swift */,
 				B7385C1D25A8FDA2001A60DF /* NameButton.swift */,
+				B72794EA25A923A700C1860C /* NearbyUsersView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				B7385C1925A8EE4A001A60DF /* ShelfModel.swift in Sources */,
 				B7385C2325A90043001A60DF /* Shelf.swift in Sources */,
 				B7385BC0259BE1E5001A60DF /* ButtonModifiers.swift in Sources */,
+				B72794EB25A923A700C1860C /* NearbyUsersView.swift in Sources */,
 				B7146E58255B5BCA00D8EDD1 /* Home.swift in Sources */,
 				B7385C3125A904BD001A60DF /* Modifiers.swift in Sources */,
 				B7385C3625A909F3001A60DF /* ProductView.swift in Sources */,
