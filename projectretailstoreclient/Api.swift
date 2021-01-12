@@ -30,9 +30,7 @@ struct ShelfRequest: Codable {
 func getNearbyUsers(completion: @escaping(Array<UserBrief>) -> Void) -> Void {
     
     var nearbyUsers: Array<UserBrief> = []
-    
-    print("Beginning API Call")
-    
+ 
     //URL Specifics
     guard let url = URL(string: "http:\(REQUEST_URL):3000/routes/getNearbyUsers") else { return }
     
@@ -60,7 +58,6 @@ func getNearbyUsers(completion: @escaping(Array<UserBrief>) -> Void) -> Void {
         if let data = data {
             let users: [UserBrief] = try! JSONDecoder().decode([UserBrief].self, from: data)
             for user in users { nearbyUsers.append(user) }
-            print("Made API Call")
             completion(nearbyUsers)
         }
     }
@@ -114,8 +111,6 @@ func getUser(uid: String, completion: @escaping(User) -> Void) -> Void {
     request.setValue("application/JSON", forHTTPHeaderField: "Accept")
     request.setValue("application/JSON", forHTTPHeaderField: "Content-Type")
     
-    print(uid)
-
     //Structure data
     let req = UserRequest(userId: uid)
 

@@ -26,3 +26,5 @@ struct UserBrief: Decodable, Identifiable {
     let id: String
     let name: String
 }
+
+let placeholderUser = User(uid: "", firstName: "", email: "", hasEnteredSizingPreferences: false, femalePantsSize: "", femaleShirtSize: "", maleShirtSize: "", maleLengthSize: 0, maleWaistSize: 0, styles: [])

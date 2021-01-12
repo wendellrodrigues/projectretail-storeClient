@@ -18,11 +18,15 @@ struct NameButton: View {
     
         Button(action: {
             //POST request to get user info and set to current user
-            getUser(uid: data.id) { user in
-                currentUser.user = user
+            DispatchQueue.main.async {
+                getUser(uid: data.id) { user in
+                    currentUser.user = user
+                    //Let view know there is a current user (to open product view)
+                    currentUser.isCurUser = true
+                }
             }
-            //Let view know there is a current user
-            currentUser.isCurUser = true
+            
+            
         }) {
             HStack {
                 Spacer()

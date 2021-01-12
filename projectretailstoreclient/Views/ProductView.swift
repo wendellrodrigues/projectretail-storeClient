@@ -16,9 +16,10 @@ struct ProductView: View {
     
     @Binding var began: Bool
     
-    let placeholderUser = User(uid: "", firstName: "", email: "", hasEnteredSizingPreferences: false, femalePantsSize: "", femaleShirtSize: "", maleShirtSize: "", maleLengthSize: 0, maleWaistSize: 0, styles: [])
     
     @State var productImage: UIImage = UIImage(systemName: "questionmark")!
+    
+    @State var recentlyViewedItems: [ShelfBrief] = []
     
     var body: some View  {
         VStack {
@@ -39,18 +40,19 @@ struct ProductView: View {
         .onAppear {
             
             //Load product image
-            loadFirebaseImage(url: "gs://projectretail-4dd60.appspot.com/khakis.png") { image in
+            loadFirebaseImage(url: "gs://projectretail-4dd60.appspot.com/\(shelf.shelf.image)") { image in
                 self.productImage = image
             }
             
+            print(currentUser.user)
+            
             //Load recently viewed product objects
+            loadRecentlyViewedProducts()
             
         }
     }
     
 
-    
-    
     //Load up a firebase image
     func loadFirebaseImage(url: String, completion: @escaping(UIImage) -> Void) -> Void {
         //Initial image
@@ -73,7 +75,15 @@ struct ProductView: View {
     
     
     func loadRecentlyViewedProducts() {
-        print("Place functionality here")
+        print("Recently viewed products: ")
+        
+        //Loop through user object styles array for uids
+        let styles = currentUser.user.styles
+        
+        print(styles)
+        
+        
+        
     }
 }
 

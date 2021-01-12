@@ -15,10 +15,19 @@ struct ShelfModel: Decodable {
     let name        : String
     let image       : String
     let nearbyUsers : [UserBrief]
-    let sizes       : [Size] //Alter if the size is not Length/Waist (pants only)
+    let sizes       : [MalePantSize] //Alter if the size is not Length/Waist (pants only)
 }
 
-struct Size: Decodable {
+
+struct ShelfBrief: Decodable {
+    let uid: String
+    let image: String
+}
+
+//Create more types of sizes and conditionally alter ShelfModel sizes
+struct MalePantSize: Decodable {
     let length: String
     let waist: String
 }
+
+
