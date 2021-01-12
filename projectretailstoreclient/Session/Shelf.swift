@@ -14,7 +14,7 @@ class Shelf: ObservableObject {
     let objectWillChange = PassthroughSubject<Shelf,Never>()
 
     @Published var shelf:
-        ShelfModel = ShelfModel(UUID: "", major: "", minor: "", name: "", image: "", nearbyUsers: [], sizes: []) {
+        ShelfModel = ShelfModel(uid: "", UUID: "", major: "", minor: "", name: "", image: "", nearbyUsers: [], sizes: []) {
         didSet { objectWillChange.send(self) }
     }
 }

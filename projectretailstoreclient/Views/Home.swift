@@ -35,15 +35,13 @@ struct Home: View {
                 //Welcome message
                 Text(began ? SELECT_NAME_TITLE : WELCOME_MSG_TITLE)
                     .font(Font.custom("DMSans-Bold", size: 50))
-                    .padding(.bottom, began ? 10 : 30)
-//                    .animation(.easeInOut)
+                    .padding(.bottom, began ? 10 : 50)
                 
                 if(began) {
                     Text(SELECT_NAME_INSTRUCTIONS)
                         .font(Font.custom("DMSans-Bold", size: 25))
                         .foregroundColor(Color.gray)
                         .padding(.bottom, 40)
-//                        .animation(.easeInOut)
                 }
                 
                 if(began) {

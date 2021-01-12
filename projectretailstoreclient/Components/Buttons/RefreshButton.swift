@@ -48,14 +48,13 @@ struct RefreshButton: View {
                 VStack {
                     Image(systemName: "arrow.clockwise")
                         .foregroundColor(Color.black)
-                        .font(Font.custom("DMSans-Bold", size: 36))
+                        .font(Font.custom("DMSans-Medium", size: 36))
                         .padding(.bottom, 10)
                     Text("Refresh")
                         .foregroundColor(Color.black)
                         .font(Font.custom("DMSans-Bold", size: 18))
                 }
             }
-            //.buttonStyle(LargeButtonModifier())
         }
     }
 }

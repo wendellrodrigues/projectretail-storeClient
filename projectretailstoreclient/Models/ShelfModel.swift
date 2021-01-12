@@ -8,6 +8,7 @@
 import Foundation
 
 struct ShelfModel: Decodable {
+    let uid         : String
     let UUID        : String
     let major       : String
     let minor       : String

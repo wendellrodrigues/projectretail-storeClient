@@ -37,26 +37,43 @@ struct ProductView: View {
                 }
         }
         .onAppear {
-            loadFirebaseImage()
+            
+            //Load product image
+            loadFirebaseImage(url: "gs://projectretail-4dd60.appspot.com/khakis.png") { image in
+                self.productImage = image
+            }
+            
+            //Load recently viewed product objects
+            
         }
     }
     
+
+    
+    
     //Load up a firebase image
-    func loadFirebaseImage() {
+    func loadFirebaseImage(url: String, completion: @escaping(UIImage) -> Void) -> Void {
+        //Initial image
+        var image = UIImage(systemName: "sun.min")!
         //Storage
         let storage = Storage.storage()
         // Create a reference from a Google Cloud Storage URI
-        let gsReference = storage.reference(forURL: "gs://projectretail-4dd60.appspot.com/khakis.png")
+        let gsReference = storage.reference(forURL: url)
         // Download in memory with a maximum allowed size of 2MB (2* 1024 * 1024 bytes)
         gsReference.getData(maxSize: 2 * 1024 * 1024) { data, error in
-          if let error = error {
-            print(error)
+            if error != nil {
+            completion(image)
           } else {
             // Data for "images/island.jpg" is returned
-            self.productImage = UIImage(data: data!)!
-            print("We have some data")
+            image = UIImage(data: data!)!
+            completion(image)
           }
         }
+    }
+    
+    
+    func loadRecentlyViewedProducts() {
+        print("Place functionality here")
     }
 }
 
