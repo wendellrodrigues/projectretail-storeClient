@@ -15,22 +15,40 @@ struct NearbyUsersView: View {
     var body: some View {
         //Grid of names
         ScrollView {
-            LazyVGrid(columns: threeColumnGrid) {
-                ForEach(nearbyUsers.nearbyUsers) { data in
-                    HStack {
-                        Text(data.id)
-                            .onTapGesture {
-                                //Load current user
-                                getUser(uid: data.id) { user in
-                                    currentUser.user = user
-                                }
-                                //Let view know there is a current user
-                                currentUser.isCurUser = true
-                            }
-                    }
+            
+            //Column layout is based on number of users (in order to center the items)
+            if(nearbyUsers.nearbyUsers.count == 1) {
+                LazyVGrid(columns: oneColumnGrid) {
+                    NearbyUsersGrid()
+                        .environmentObject(nearbyUsers)
+                        .environmentObject(currentUser)
+                }
+            }
+            
+            //Column layout is based on number of users (in order to center the items)
+            else {
+                LazyVGrid(columns: twoColumnGrid) {
+                    NearbyUsersGrid()
+                        .environmentObject(nearbyUsers)
+                        .environmentObject(currentUser)
                 }
             }
         }
-        .frame(maxHeight: 100)
+        .modifier(NearbyUsersGridModifier())
+    }
+}
+
+
+struct NearbyUsersGrid: View {
+    
+    @EnvironmentObject var nearbyUsers: NearbyUsers
+    @EnvironmentObject var currentUser: CurrentUser
+    
+    var body: some View {
+        ForEach(nearbyUsers.nearbyUsers) { data in
+            HStack {
+                NameButton(data: data)
+            }
+        }
     }
 }

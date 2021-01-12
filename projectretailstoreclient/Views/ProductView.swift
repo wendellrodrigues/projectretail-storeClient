@@ -14,6 +14,8 @@ struct ProductView: View {
     @EnvironmentObject var shelf: Shelf
     @EnvironmentObject var currentUser: CurrentUser
     
+    @Binding var began: Bool
+    
     let placeholderUser = User(uid: "", firstName: "", email: "", hasEnteredSizingPreferences: false, femalePantsSize: "", femaleShirtSize: "", maleShirtSize: "", maleLengthSize: 0, maleWaistSize: 0, styles: [])
     
     @State var productImage: UIImage = UIImage(systemName: "questionmark")!
@@ -26,6 +28,13 @@ struct ProductView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(maxHeight: 200)
             Text("\(currentUser.user.firstName)")
+            
+            Text("Exit")
+                .onTapGesture {
+                    self.began = false
+                    self.currentUser.user = placeholderUser
+                    self.currentUser.isCurUser = false
+                }
         }
         .onAppear {
             loadFirebaseImage()

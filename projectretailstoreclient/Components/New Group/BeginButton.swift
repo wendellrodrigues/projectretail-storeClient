@@ -38,7 +38,7 @@ struct BeginButton: View {
         VStack(spacing: 20) {
             
             Button(action: {
-                
+                //Change began to true (user has began the process of finding their name)
                 self.began = true
                 
                 //Load Shelf data and mount it onto CurrentShelf
@@ -46,6 +46,7 @@ struct BeginButton: View {
                     loadShelf(shelf: shelf)
                 }
                 
+                //Add current users to environment object nearbyUsers
                 getNearbyUsers() { users in
                     addUsers(users: users)
                 }
@@ -58,12 +59,6 @@ struct BeginButton: View {
                 }
             }
             .buttonStyle(LargeButtonModifier())
-            
         }
-        
-        
-        
     }
-    
-
 }

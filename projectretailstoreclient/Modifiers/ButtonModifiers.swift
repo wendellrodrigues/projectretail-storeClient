@@ -21,4 +21,17 @@ struct LargeButtonModifier: ButtonStyle {
     }
 }
 
+struct NameButtonModifier: ButtonStyle  {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .font(Font.custom("DMSans-Bold", size: 15))
+            .foregroundColor(Color("Button_Text"))
+            .frame(width: 280, height: 55, alignment: .center)
+            .background(Color("Button_Background").opacity(configuration.isPressed ? 0.5 : 8))
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+            .padding(.bottom, 30)
+    }
+}
+
 
