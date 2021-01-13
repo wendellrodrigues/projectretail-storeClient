@@ -26,6 +26,10 @@ struct ShelfRequest: Codable {
     var beaconMinor: String
 }
 
+struct ShelfWithIdRequest: Codable {
+    var uid: String
+}
+
 //POST Requests
 func getNearbyUsers(completion: @escaping(Array<UserBrief>) -> Void) -> Void {
     
@@ -98,7 +102,41 @@ func getShelf(completion: @escaping(ShelfModel) -> Void) -> Void {
     }
     
     task.resume()
+}
+
+
+//For getting shelf just using a uid
+func getShelfWithId(uid: String, completion: @escaping(ShelfModel) -> Void) -> Void {
     
+    //URL Specifics
+    guard let url = URL(string: "http:\(REQUEST_URL):3000/routes/getShelfWithId") else { return }
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("application/JSON", forHTTPHeaderField: "Accept")
+    request.setValue("application/JSON", forHTTPHeaderField: "Content-Type")
+
+    //Structure data for request
+    let req = ShelfWithIdRequest(
+        uid: uid
+    )
+    
+    //Encode request
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .prettyPrinted
+    let jsonData = try! encoder.encode(req)
+    request.httpBody = jsonData
+    
+    //Task
+    let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let data = data {
+            let shelf: ShelfModel = try! JSONDecoder().decode(ShelfModel.self, from: data)
+            print(shelf)
+            completion(shelf)
+        }
+    }
+    
+    task.resume()
 }
 
 func getUser(uid: String, completion: @escaping(User) -> Void) -> Void {

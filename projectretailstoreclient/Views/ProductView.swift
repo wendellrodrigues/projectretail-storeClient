@@ -29,7 +29,15 @@ struct ProductView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(maxHeight: 200)
             Text("\(currentUser.user.firstName)")
+                .padding(.bottom, 40)
             
+            ForEach(recentlyViewedItems) { item in
+                Image(uiImage: item.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxHeight: 200)
+            }
+                     
             Text("Exit")
                 .onTapGesture {
                     self.began = false
@@ -43,9 +51,7 @@ struct ProductView: View {
             loadFirebaseImage(url: "gs://projectretail-4dd60.appspot.com/\(shelf.shelf.image)") { image in
                 self.productImage = image
             }
-            
-            print(currentUser.user)
-            
+
             //Load recently viewed product objects
             loadRecentlyViewedProducts()
             
@@ -53,7 +59,7 @@ struct ProductView: View {
     }
     
 
-    //Load up a firebase image
+    //Load up an image on firebase
     func loadFirebaseImage(url: String, completion: @escaping(UIImage) -> Void) -> Void {
         //Initial image
         var image = UIImage(systemName: "sun.min")!
@@ -75,15 +81,20 @@ struct ProductView: View {
     
     
     func loadRecentlyViewedProducts() {
-        print("Recently viewed products: ")
-        
         //Loop through user object styles array for uids
         let styles = currentUser.user.styles
-        
-        print(styles)
-        
-        
-        
+        for style in styles {
+            //Assign placeholder shelf to received shelf object
+            getShelfWithId(uid: style) { shelf in
+                //Load image
+                loadFirebaseImage(url: "gs://projectretail-4dd60.appspot.com/\(shelf.image)") { image in
+                    //Create shelf brief using items
+                    let viewedItem = ShelfBrief(id: UUID(), uid: shelf.uid, image: image)
+                    //Append to recentlyViewedItems
+                    recentlyViewedItems.append(viewedItem)
+                }
+            }
+        }
     }
 }
 

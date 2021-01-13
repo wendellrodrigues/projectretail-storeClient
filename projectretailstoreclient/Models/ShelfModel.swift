@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct ShelfModel: Decodable {
     let uid         : String
@@ -19,9 +20,10 @@ struct ShelfModel: Decodable {
 }
 
 
-struct ShelfBrief: Decodable {
+struct ShelfBrief: Identifiable {
+    var id: UUID
     let uid: String
-    let image: String
+    let image: UIImage
 }
 
 //Create more types of sizes and conditionally alter ShelfModel sizes
