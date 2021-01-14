@@ -22,6 +22,7 @@ struct projectretailstoreclientApp: App {
                 .environmentObject(NearbyUsers())
                 .environmentObject(Shelf())
                 .environmentObject(CurrentUser())
+                .statusBar(hidden: true)
         }
     }
 }

@@ -15,7 +15,7 @@ struct ProductView: View {
     @EnvironmentObject var currentUser: CurrentUser
     
     @Binding var began: Bool
-    @State var productImage: UIImage = UIImage(systemName: "questionmark")!
+    @State var productImage: UIImage = UIImage()
 
     var body: some View  {
         VStack {
@@ -40,7 +40,7 @@ struct ProductView: View {
                     
                     //Button that fetches other sizes (modal)
                     OtherSizesButton()
-                        .padding(.bottom, 60)
+                        .padding(.bottom, 65)
                     
                     //Button that ends the session
                     ExitButton(began: $began)
