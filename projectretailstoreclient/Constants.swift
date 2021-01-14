@@ -18,6 +18,10 @@ let WELCOME_MSG_TITLE = "Welcome"
 let WELCOME_MSG_SUB = ""
 let SELECT_NAME_TITLE = "Begin"
 let SELECT_NAME_INSTRUCTIONS = "Select your name below"
+let FIND_SIZE = "Find my size"
+let OTHER_SIZES = "Other available sizes"
+let EXIT = "Exit"
+let PREVIOUSLY_VIEWED = "Previously viewed items"
 
 //Static beacon ID (for this iPad only, in future handle with login)
 let BEACON_ID = "7777772E-6B6B-6D63-6E2E-636F6D000001"

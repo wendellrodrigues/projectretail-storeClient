@@ -15,11 +15,15 @@ struct ShelfModel: Decodable {
     let minor       : String
     let name        : String
     let image       : String
+    let price       : Int
+    let attributes  : [String]
+    let color       : String
+    let description : String
     let nearbyUsers : [UserBrief]
     let sizes       : [MalePantSize] //Alter if the size is not Length/Waist (pants only)
 }
 
-
+//For recently viewed images
 struct ShelfBrief: Identifiable {
     var id: UUID
     let uid: String
@@ -30,6 +34,10 @@ struct ShelfBrief: Identifiable {
 struct MalePantSize: Decodable {
     let length: String
     let waist: String
+}
+
+extension String: Identifiable {
+    public var id: String { self }
 }
 
 

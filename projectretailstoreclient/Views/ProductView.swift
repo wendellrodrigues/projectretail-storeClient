@@ -15,84 +15,105 @@ struct ProductView: View {
     @EnvironmentObject var currentUser: CurrentUser
     
     @Binding var began: Bool
-    
-    
     @State var productImage: UIImage = UIImage(systemName: "questionmark")!
-    
-    @State var recentlyViewedItems: [ShelfBrief] = []
-    
+
     var body: some View  {
         VStack {
-            Text("\(self.shelf.shelf.name)")
-            Image(uiImage: (productImage))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxHeight: 200)
-            Text("\(currentUser.user.firstName)")
-                .padding(.bottom, 40)
             
-            ForEach(recentlyViewedItems) { item in
-                Image(uiImage: item.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxHeight: 200)
-            }
-                     
-            Text("Exit")
-                .onTapGesture {
-                    self.began = false
-                    self.currentUser.user = placeholderUser
-                    self.currentUser.isCurUser = false
+            HStack(alignment: .top) {
+                //Left side
+                VStack {
+                    //Product Image
+                    Image(uiImage: (productImage))
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxHeight: 300)
+                        .padding(.bottom, 50)
+                    
+                    //Find Size Button
+                    FindSizeButton()
+                        .padding(.bottom, 20)
+                    
+                    //Divider that says "------OR------"
+                    Or_Divider()
+                        .padding(.bottom, 20)
+                    
+                    //Button that fetches other sizes (modal)
+                    OtherSizesButton()
+                        .padding(.bottom, 60)
+                    
+                    //Button that ends the session
+                    ExitButton(began: $began)
+                        .environmentObject(currentUser)
                 }
+                .padding(.trailing, 75)
+                
+                VStack(alignment: .leading) {
+                    
+                    //Name
+                    Text(shelf.shelf.name)
+                        .font(Font.custom("DMSans-Bold", size: 40))
+                        .foregroundColor(Color.black)
+                    
+                    //Color
+                    Text(shelf.shelf.color)
+                        .font(Font.custom("DMSans-Medium", size: 28))
+                        .foregroundColor(Color.gray)
+                        .padding(.bottom, 20)
+                    
+                    //Long description
+                    ScrollView {
+                        Text(shelf.shelf.description)
+                            .font(Font.custom("DMSans-Regular", size: 14))
+                            .foregroundColor(Color.gray)
+                            .frame(width: 500)
+                    }
+                    .frame(height: 50)
+                    .padding(.bottom, 20)
+                    
+                    //Attributes
+                    ScrollView {
+                        ForEach(shelf.shelf.attributes) { attribute in
+                            HStack {
+                                Text("- \(attribute)")
+                                    .font(Font.custom("DMSans-Regular", size: 14))
+                                    .foregroundColor(Color.gray)
+                                Spacer()
+                            }
+                        }
+                        .frame(width: 500)
+                    }
+                    .frame(height: 100)
+                    .padding(.bottom, 60)
+                    
+                    //Price
+                    Text("$\(String(shelf.shelf.price))")
+                        .font(Font.custom("DMSans-Medium", size: 28))
+                        .foregroundColor(Color.black.opacity(0.8))
+                        .padding(.bottom, 37)
+                    
+                    //Divider
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.5))
+                        .frame(width: 500, height: 1)
+                        .padding(.bottom, 30)
+                    
+                    //Title for previously viewed items
+                    Text(PREVIOUSLY_VIEWED)
+                        .font(Font.custom("DMSans-Bold", size: 16))
+                        .foregroundColor(Color.gray)
+                        .padding(.bottom, 30)
+                    
+                    //Previously Viewed Items
+                    RecentlyViewedItems()
+                    
+                }
+            }
         }
         .onAppear {
-            
             //Load product image
             loadFirebaseImage(url: "gs://projectretail-4dd60.appspot.com/\(shelf.shelf.image)") { image in
                 self.productImage = image
-            }
-
-            //Load recently viewed product objects
-            loadRecentlyViewedProducts()
-            
-        }
-    }
-    
-
-    //Load up an image on firebase
-    func loadFirebaseImage(url: String, completion: @escaping(UIImage) -> Void) -> Void {
-        //Initial image
-        var image = UIImage(systemName: "sun.min")!
-        //Storage
-        let storage = Storage.storage()
-        // Create a reference from a Google Cloud Storage URI
-        let gsReference = storage.reference(forURL: url)
-        // Download in memory with a maximum allowed size of 2MB (2* 1024 * 1024 bytes)
-        gsReference.getData(maxSize: 2 * 1024 * 1024) { data, error in
-            if error != nil {
-            completion(image)
-          } else {
-            // Data for "images/island.jpg" is returned
-            image = UIImage(data: data!)!
-            completion(image)
-          }
-        }
-    }
-    
-    
-    func loadRecentlyViewedProducts() {
-        //Loop through user object styles array for uids
-        let styles = currentUser.user.styles
-        for style in styles {
-            //Assign placeholder shelf to received shelf object
-            getShelfWithId(uid: style) { shelf in
-                //Load image
-                loadFirebaseImage(url: "gs://projectretail-4dd60.appspot.com/\(shelf.image)") { image in
-                    //Create shelf brief using items
-                    let viewedItem = ShelfBrief(id: UUID(), uid: shelf.uid, image: image)
-                    //Append to recentlyViewedItems
-                    recentlyViewedItems.append(viewedItem)
-                }
             }
         }
     }

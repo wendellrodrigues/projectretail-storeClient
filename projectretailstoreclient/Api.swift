@@ -171,20 +171,24 @@ func getUser(uid: String, completion: @escaping(User) -> Void) -> Void {
 
 
 
-
-func loadImage(completion: @escaping(UIImage) -> Void) -> Void {
-
-    let gsRef = Ref.init().storage.reference(forURL: "gs://projectretail-4dd60.appspot.com/khakis.png")
-    
-    gsRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-        if let error = error {
-            // Uh-oh, an error occurred!
-        } else {
-            // Data for "images/island.jpg" is returned
-            let image = UIImage(data: data!)
-            completion((image ??  UIImage(systemName: "questionmark"))!)
-        }
+//Load up an image on firebase
+func loadFirebaseImage(url: String, completion: @escaping(UIImage) -> Void) -> Void {
+    //Initial image
+    var image = UIImage(systemName: "sun.min")!
+    //Storage
+    let storage = Storage.storage()
+    // Create a reference from a Google Cloud Storage URI
+    let gsReference = storage.reference(forURL: url)
+    // Download in memory with a maximum allowed size of 2MB (2* 1024 * 1024 bytes)
+    gsReference.getData(maxSize: 2 * 1024 * 1024) { data, error in
+        if error != nil {
+        completion(image)
+      } else {
+        // Data for "images/island.jpg" is returned
+        image = UIImage(data: data!)!
+        completion(image)
       }
+    }
 }
 
 
