@@ -18,9 +18,11 @@ struct ShelfModel: Decodable {
     let price       : Int
     let attributes  : [String]
     let color       : String
+    let type        : String
+    let gender      : String
     let description : String
     let nearbyUsers : [UserBrief]
-    let sizes       : [MalePantSize] //Alter if the size is not Length/Waist (pants only)
+    let sizes       : [SizeType]//Alter if the size is not Length/Waist (pants only)
 }
 
 //For recently viewed images
@@ -30,11 +32,38 @@ struct ShelfBrief: Identifiable {
     let image: UIImage
 }
 
+struct SizeType: Decodable {
+    let maleLengthSize: Int
+    let maleWaistSize: Int
+    let maleShirtSize: String
+    let femaleShirtSize: String
+    let femalePantSize: String
+    let shelf: Int
+}
+
 //Create more types of sizes and conditionally alter ShelfModel sizes
 struct MalePantSize: Decodable {
-    let length: String
-    let waist: String
+    let length: Int
+    let waist: Int
+    let shelf: Int
 }
+
+struct MaleShirtSize: Decodable {
+    let size: String
+    let shelf: Int
+}
+
+struct FemalePantSize: Decodable {
+    let size: String
+    let shelf: Int
+}
+
+struct FemaleShirtSize: Decodable {
+    let size: String
+    let shelf: Int
+}
+
+
 
 extension String: Identifiable {
     public var id: String { self }

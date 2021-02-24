@@ -20,6 +20,10 @@ struct UserRequest: Codable {
     var userId: String
 }
 
+struct LightShelfRequest: Codable {
+    var shelf: Int
+}
+
 struct ShelfRequest: Codable {
     var beaconId: String
     var beaconMajor: String
@@ -189,6 +193,34 @@ func loadFirebaseImage(url: String, completion: @escaping(UIImage) -> Void) -> V
         completion(image)
       }
     }
+}
+
+
+func findMySize(shelf: Int) {
+    
+    //URL Specifics
+    guard let url = URL(string: "http:\(REQUEST_URL):3000/routes/findSize") else { return }
+
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("application/JSON", forHTTPHeaderField: "Accept")
+    request.setValue("application/JSON", forHTTPHeaderField: "Content-Type")
+    
+    //Structure data
+    let req = LightShelfRequest(shelf: shelf)
+
+    //Encode JSON
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .prettyPrinted
+    let jsonData = try! encoder.encode(req)
+    request.httpBody = jsonData
+    
+    //Task
+    let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+    }
+    
+    task.resume()
+    
 }
 
 
